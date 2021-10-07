@@ -18,7 +18,6 @@ FLAGS=(
 #   --enable-decoder=aac,pcm_s16le
 #   --enable-demuxer=mov,matroska
 #   --enable-muxer=mp4
-  --prefix=/opt/ffmpeg
   --target-os=none
   --arch=x86_32
   --enable-cross-compile
@@ -28,6 +27,10 @@ FLAGS=(
   --disable-stripping
   --disable-programs
   --disable-doc
+  --disable-runtime-cpudetect
+  --disable-autodetect
+  --pkg-config-flags="--static"
+  # --disable-pthreads --disable-w32threads --disable-os2threads
   --extra-cflags="$CFLAGS"
   --extra-cxxflags="$CFLAGS"
   --extra-ldflags="$LDFLAGS"
