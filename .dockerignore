@@ -1,1 +1,3 @@
-www/node_modules/
+*
+
+!*.sh
