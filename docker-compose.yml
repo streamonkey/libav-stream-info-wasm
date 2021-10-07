@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  ffprobe-wasm:
+    build: .
+    volumes:
+      - "./ffmpeg:/compile/ffmpeg"
+      - "./dist:/dist"
