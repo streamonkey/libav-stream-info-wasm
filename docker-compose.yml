@@ -4,7 +4,6 @@ services:
   ffprobe-wasm:
     build: .
     volumes:
-      - "./ffmpeg:/compile/ffmpeg"
       - "./dist:/dist"
       - "./.cache/modules:/emsdk/upstream/emscripten/cache"
       - "./.cache/data:/emsdk_portable/.data/cache/wasm"

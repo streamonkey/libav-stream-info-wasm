@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CFLAGS="-s USE_PTHREADS=1 -O3 -I/opt/ffmpeg/include"
+CFLAGS="-s USE_PTHREADS=1 -O0 -I/opt/ffmpeg/include"
 LDFLAGS="$CFLAGS -L/opt/ffmpeg/lib -s INITIAL_MEMORY=33554432"
 
 
@@ -18,6 +18,7 @@ FLAGS=(
 #   --enable-decoder=aac,pcm_s16le
 #   --enable-demuxer=mov,matroska
 #   --enable-muxer=mp4
+  --prefix=/dist
   --target-os=none
   --arch=x86_32
   --enable-cross-compile
