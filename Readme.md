@@ -1,4 +1,4 @@
-# ffProbe Webassembly
+# libav-stream-info-wasm
 
 This library uses [libav](https://libav.org/) to extract an audio files Tags, just like [ffprobe](https://ffmpeg.org/ffprobe.html) does.
 
@@ -8,9 +8,9 @@ Depending on your bundler, you might need a different way to instantiate the mod
 The following works to initialize the module in Vite:
 
 ```ts
-import FFProbeCore, { type FFprobeCore } from "ffprobe-wasm"
-import FFprobewasm from 'ffprobe-wasm/ffprobe-core.wasm?url'
-import FFprobeWorker from 'ffprobe-wasm/ffprobe-core.worker.js?url'
+import FFProbeCore, { type FFprobeCore } from "libav-stream-info-wasm"
+import FFprobewasm from 'libav-stream-info-wasm/wasm?url'
+import FFprobeWorker from 'libav-stream-info-wasm/worker?url'
 
 const ffprobe = await FFProbeCore({
     locateFile: (path, prefix) => {
@@ -40,5 +40,5 @@ for (let i = 0; i < keys.size(); i++) {
     tags[key] = out.get(key)
 }
 
-return tags
+// do something with tags
 ```

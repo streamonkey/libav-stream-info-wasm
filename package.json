@@ -1,22 +1,29 @@
 {
-  "name": "ffprobe-wasm",
+  "name": "libav-stream-info-wasm",
   "version": "1.0.0",
   "description": "wasm bindings for libav to extract audio tags",
   "main": "dist/ffprobe-core.js",
   "types": "types.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RSWilli/ffprobe-wasm.git"
+    "url": "git+https://github.com/streamonkey/libav-stream-info-wasm.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ffprobe",
+    "WebAssembly",
+    "wasm",
+    "ffmpeg",
+    "libav",
+    "ID3",
+    "Metadata",
+    "audio"
+  ],
+  "author": "Wilhelm Bartel <wilhelm.bartel@streamonkey.de>",
+  "license": "APACHE-2.0",
   "bugs": {
-    "url": "https://github.com/RSWilli/ffprobe-wasm/issues"
+    "url": "https://github.com/streamonkey/libav-stream-info-wasm/issues"
   },
-  "homepage": "https://github.com/RSWilli/ffprobe-wasm#readme",
+  "homepage": "https://github.com/streamonkey/libav-stream-info-wasm#readme",
   "devDependencies": {
     "@types/emscripten": "^1.39.6"
   },
@@ -29,15 +36,11 @@
       "import": "./dist/ffprobe-core.js",
       "require": "./dist/ffprobe-core.js"
     },
-    "./ffprobe-core.js": {
-      "import": "./dist/ffprobe-core.js",
-      "require": "./dist/ffprobe-core.js"
-    },
-    "./ffprobe-core.wasm": {
+    "./wasm": {
       "import": "./dist/ffprobe-core.wasm",
       "require": "./dist/ffprobe-core.wasm"
     },
-    "./ffprobe-core.worker.js": {
+    "./worker": {
       "import": "./dist/ffprobe-core.worker.js",
       "require": "./dist/ffprobe-core.worker.js"
     }
