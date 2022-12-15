@@ -1,0 +1,45 @@
+{
+  "name": "ffprobe-wasm",
+  "version": "1.0.0",
+  "description": "wasm bindings for libav to extract audio tags",
+  "main": "dist/ffprobe-core.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RSWilli/ffprobe-wasm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RSWilli/ffprobe-wasm/issues"
+  },
+  "homepage": "https://github.com/RSWilli/ffprobe-wasm#readme",
+  "devDependencies": {
+    "@types/emscripten": "^1.39.6"
+  },
+  "files": [
+    "dist",
+    "types.d.ts"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/ffprobe-core.js",
+      "require": "./dist/ffprobe-core.js"
+    },
+    "./ffprobe-core.js": {
+      "import": "./dist/ffprobe-core.js",
+      "require": "./dist/ffprobe-core.js"
+    },
+    "./ffprobe-core.wasm": {
+      "import": "./dist/ffprobe-core.wasm",
+      "require": "./dist/ffprobe-core.wasm"
+    },
+    "./ffprobe-core.worker.js": {
+      "import": "./dist/ffprobe-core.worker.js",
+      "require": "./dist/ffprobe-core.worker.js"
+    }
+  }
+}
