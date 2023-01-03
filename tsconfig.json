@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ES2020",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "allowJs": false,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "sourceMap": true,
+    "importsNotUsedAsValues": "error",
+    "declarationDir": "./dist",
+    "paths": {
+      "@wasm/*": [
+        "./src/wasm-dist/*"
+      ]
+    },
+    "rootDir": "./src"
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.mts",
+  ],
+  "exclude": [
+    "./src/wasm/**/*",
+    "node_modules"
+  ]
+}
