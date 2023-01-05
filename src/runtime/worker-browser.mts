@@ -56,7 +56,7 @@ async function getFileTags(
 
     try {
         try {
-            console.log(FS.stat("/work"))
+            FS.stat("/work")
         } catch (error) {
             FS.mkdir("/work")
         }
