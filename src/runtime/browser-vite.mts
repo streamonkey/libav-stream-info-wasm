@@ -15,7 +15,7 @@ const worker = new BrowserWorker()
 export async function getAudioFileTags(file: File) {
   const fileInfo = await postMessage({
     type: "getFileTags",
-    payload: { fileName: file.name, file },
+    file,
   })
   return fileInfo
 }

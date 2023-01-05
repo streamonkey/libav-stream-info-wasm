@@ -1,3 +1,4 @@
+# https://github.com/emscripten-core/emscripten/blob/main/src/settings.js
 dist/libav-wasm.js:
 	mkdir -p dist && \
 	emcc --bind \
@@ -8,10 +9,9 @@ dist/libav-wasm.js:
 	-s INITIAL_MEMORY=268435456 \
 	-lavcodec -lavformat -lavfilter -lavdevice -lswresample -lswscale -lavutil -lm \
 	-lworkerfs.js \
-	-s EXPORT_ES6=1 \
-	-s WASM=1 \
-	-s SINGLE_FILE \
-	--closure 1 \
+	-s EXPORT_ES6 \
 	-s MODULARIZE \
+	-sENVIRONMENT=worker \
+	-sINCOMING_MODULE_JS_API='' \
 	-o dist/libav-wasm.mjs \
 	src/libav-wasm-wrapper.cpp

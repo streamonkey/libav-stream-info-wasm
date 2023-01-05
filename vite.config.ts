@@ -4,14 +4,15 @@ import * as path from "path"
 export default defineConfig({
   build: {
     outDir: "dist",
+    target: "esnext",
     lib: {
-      entry: "src/runtime/browser-vite.mts",
+      entry: path.resolve(__dirname, "src/runtime/browser-vite.mts"),
       formats: ["es"],
-      fileName: () => "browser.mjs",
+      fileName: "browser",
     },
     emptyOutDir: true,
-    minify: true,
-    sourcemap: false,
+    minify: "esbuild",
+    sourcemap: true,
   },
   resolve: {
     alias: {
@@ -19,5 +20,6 @@ export default defineConfig({
     }
   },
   worker: {
+    format: "iife",
   },
 })

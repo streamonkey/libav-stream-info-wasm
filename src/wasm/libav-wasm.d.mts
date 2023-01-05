@@ -18,14 +18,17 @@ export interface WorkerFSMountOptions {
     packages?: any[]
 }
 
-// declare global variables
-declare global {
-    const WORKERFS: Emscripten.FileSystemType
+type EmscriptenFS = typeof FS
+
+interface ExtendedFS extends EmscriptenFS {
+    filesystems: {
+        WORKERFS: Emscripten.FileSystemType
+    }
 }
 
 export interface LibavWASMModule extends EmscriptenModule {
     cwrap: typeof cwrap
-    FS: typeof FS
+    FS: ExtendedFS
     ccall: typeof ccall
     setValue: typeof setValue
     getValue: typeof getValue

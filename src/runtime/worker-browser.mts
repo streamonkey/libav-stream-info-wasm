@@ -1,3 +1,4 @@
+import "./shim.mjs"
 import loadlibav from "@wasm/libav-wasm.mjs"
 import type { WorkerFSMountOptions } from "@wasm/libav-wasm.mjs"
 import { wasmMapToRecord } from "./helper.mjs"
@@ -8,7 +9,7 @@ export type IncomingMessage = {
 
 export type IncomingData = {
     type: "getFileTags"
-    payload: { fileName: string, file: File }
+    file: File
 }
 
 export type OutgoingMessage =
@@ -27,7 +28,7 @@ self.onmessage = async function onmessage(event: MessageEvent<IncomingMessage>) 
 
                 const message: OutgoingMessage = {
                     status: "success",
-                    payload: await getFileTags(data.payload.fileName, data.payload.file),
+                    payload: await getFileTags(data.file),
 
                 }
 
@@ -47,13 +48,16 @@ self.onmessage = async function onmessage(event: MessageEvent<IncomingMessage>) 
 }
 
 async function getFileTags(
-    fileName: string,
     file: File,
 ) {
-    const { FS, getFileTags } = await libavPromise
-    try {
+    const libav = await libavPromise
 
-        if (!FS.stat("/work")) {
+    const { FS, getFileTags } = libav
+
+    try {
+        try {
+            console.log(FS.stat("/work"))
+        } catch (error) {
             FS.mkdir("/work")
         }
 
@@ -63,11 +67,15 @@ async function getFileTags(
         const mountOptions: WorkerFSMountOptions = {
             files: [file],
         }
-        FS.mount(WORKERFS, mountOptions, "/work")
+        FS.mount(FS.filesystems.WORKERFS, mountOptions, "/work")
 
-        const rawInfo = getFileTags(`/work/${fileName}`)
+        const rawInfo = getFileTags(`/work/${file.name}`)
 
         return wasmMapToRecord(rawInfo)
+    } catch (error) {
+        console.log(error)
+
+        throw error
     } finally {
         // Cleanup mount.
         FS.unmount("/work")
