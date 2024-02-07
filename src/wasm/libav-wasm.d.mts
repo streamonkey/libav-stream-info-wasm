@@ -36,6 +36,7 @@ export interface LibavWASMModule extends EmscriptenModule {
     // AsciiToString: typeof AsciiToString
     exit: (exitcode: number) => void
     getFileTags: (filename: string) => WASMMapPointer<string, string>
+    getAudioDuration: (filename: string) => number
 }
 
 declare const module: EmscriptenModuleFactory<LibavWASMModule>

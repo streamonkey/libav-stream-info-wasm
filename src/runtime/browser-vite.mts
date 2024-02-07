@@ -17,10 +17,23 @@ export async function getAudioFileTags(file: File) {
     type: "getFileTags",
     file,
   })
-  return fileInfo
+  return fileInfo as Record<string, string | undefined>
 }
 
-async function postMessage(data: IncomingData): Promise<Record<string, string | undefined>> {
+/**
+ * Retreive audio duration from an audio file via libav
+ * @param file an Audio file to get tags from
+ * @returns duration in milliseconds
+ */
+export async function getAudioDuration(file: File) {
+  const fileInfo = await postMessage({
+    type: "getAudioDuration",
+    file,
+  })
+  return fileInfo as number
+}
+
+async function postMessage(data: IncomingData): Promise<Record<string, string | undefined> | number> {
   const channel = new MessageChannel()
   const message: IncomingMessage = {
     ...data,

@@ -30,6 +30,7 @@ const std::string c_avutil_version()
     return AV_STRINGIFY(LIBAVUTIL_VERSION);
 }
 
+// get all metadata tags from a file
 std::map<std::string, std::string> getFileTags(std::string filename)
 {
     av_log_set_level(AV_LOG_QUIET); // No logging output for libav.
@@ -65,6 +66,38 @@ std::map<std::string, std::string> getFileTags(std::string filename)
     return tags;
 }
 
+// probe the duration of the audio file
+// returns the duration in milliseconds as a double, because emscripten does not support int64_t
+double getAudioDuration(std::string filename)
+{
+    av_log_set_level(AV_LOG_QUIET); // No logging output for libav.
+
+    FILE *file = fopen(filename.c_str(), "rb");
+    if (!file)
+    {
+        printf("cannot open file\n");
+    }
+    fclose(file);
+
+    AVFormatContext *fmt_ctx = NULL;
+    AVDictionaryEntry *tag = NULL;
+    int ret;
+
+    if ((ret = avformat_open_input(&fmt_ctx, filename.c_str(), NULL, NULL)))
+        throw std::invalid_argument("could not open file");
+
+    if ((ret = avformat_find_stream_info(fmt_ctx, NULL)) < 0)
+    {
+        av_log(NULL, AV_LOG_ERROR, "Cannot find stream information\n");
+        throw std::invalid_argument("given file has no streams");
+    }
+
+    int64_t duration = fmt_ctx->duration / AV_TIME_BASE * 1000;
+
+    avformat_close_input(&fmt_ctx);
+    return duration;
+}
+
 EMSCRIPTEN_BINDINGS(constants)
 {
     function("avformat_version", &c_avformat_version);
@@ -75,6 +108,7 @@ EMSCRIPTEN_BINDINGS(constants)
 EMSCRIPTEN_BINDINGS(module)
 {
     function("getFileTags", &getFileTags);
+    function("getAudioDuration", &getAudioDuration);
 
     register_vector<std::string>("vector<string>");
     register_map<std::string, std::string>("map<string, string>");

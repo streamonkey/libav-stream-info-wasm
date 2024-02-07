@@ -1,7 +1,7 @@
 {
   "name": "libav-stream-info-wasm",
   "version": "2.0.1",
-  "description": "wasm bindings for libav to extract audio (e.g. ID3) tags",
+  "description": "wasm bindings for libav to extract audio (e.g. ID3) tags and duration",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/streamonkey/libav-stream-info-wasm.git"

@@ -8,7 +8,10 @@ At the end all code is bundled into a single file so it can be easily used in th
 
 ## Usage
 
-The runtime exports a single `getAudioFileTags` function that takes a `File` as an argument and returns an object of the corresponding metadata tags.
+The runtime exports two functions that take a `File` as an argument:
+
+* `getAudioFileTags` function returns an object of the corresponding metadata tags.
+* `getAudioFileDuration` function returns the duration of the audio file in milliseconds.
 
 Internally this uses a WebWorker to prevent blocking the main thread. 
 
