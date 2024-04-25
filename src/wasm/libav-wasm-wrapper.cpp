@@ -92,7 +92,7 @@ double getAudioDuration(std::string filename)
         throw std::invalid_argument("given file has no streams");
     }
 
-    int64_t duration = fmt_ctx->duration / AV_TIME_BASE * 1000;
+    double duration = double(fmt_ctx->duration) / double(AV_TIME_BASE) * 1000.0;
 
     avformat_close_input(&fmt_ctx);
     return duration;
